@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.nav-link {
+  @apply text-black hover:text-amber-600 transition-colors relative;
+}
+
+.nav-link::after {
+  content: "";
+  @apply absolute left-0 -bottom-1 w-0 h-[2px] bg-amber-600 transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+.icon-btn {
+  @apply w-5 h-5 cursor-pointer hover:text-amber-600 transition-colors;
+}
