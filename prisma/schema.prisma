@@ -1,0 +1,86 @@
+// Prisma schema for PostgreSQL (Neon)
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  orders    Order[]
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String
+  image    String? // image de la catégorie
+  products Product[]
+}
+
+enum ProductStatus {
+  DISPONIBLE
+  RUPTURE
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  url       String
+  fileId    String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Product {
+  id          String         @id @default(uuid())
+  name        String
+  description String
+  price       Int
+  oldPrice    Int?
+  category    Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId  String
+  stock       Int
+  status      ProductStatus
+  isFeatured  Boolean        @default(false)
+  createdAt   DateTime       @default(now())
+  images      ProductImage[]
+  orderItems  OrderItem[]
+}
+
+model Order {
+  id                String      @id @default(cuid())
+  userId            String?
+  user              User?       @relation(fields: [userId], references: [id])
+  customerFirstName String
+  customerLastName  String
+  customerEmail     String?
+  customerPhone     String
+  customerAddress   String?
+  customerNotes     String?
+  createdAt         DateTime    @default(now())
+  items             OrderItem[]
+  total             Int
+  status            String      @default("pending")
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  quantity  Int
+}
+
+model Payment {
+  id      String @id @default(cuid())
+  orderId String
+  method  String
+  status  String @default("pending")
+}
