@@ -22,7 +22,7 @@ const Footer = () => (
         <h4 className="font-bold uppercase text-xs tracking-widest mb-6">Collections</h4>
         <ul className="space-y-4 text-sm text-gray-500">
           <li>
-            <a href="#" className="hover:text-gold transition-colors">
+            <a href="#new" className="hover:text-gold transition-colors">
               Nouveautés
             </a>
           </li>
