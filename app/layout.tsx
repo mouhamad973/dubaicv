@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Dubai Chez Vous - Votre Boutique en Ligne',
     description: 'Découvrez notre sélection exclusive de produits du Moyen-Orient.',
-    images: [new URL('/img/logo.png', process.env.NEXT_PUBLIC_SITE_URL || 'https://dubaichezvous.com').toString()],
+    images: [new URL('/img/dark1.png', process.env.NEXT_PUBLIC_SITE_URL || 'https://dubaichezvous.com').toString()],
   },
   robots: {
     index: true,
