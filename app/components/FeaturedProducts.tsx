@@ -34,7 +34,7 @@ export function FeaturedProducts() {
     return (
       <div className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8">Nouveautés</h2>
+          <h2 className="text-2xl font-bold mb-8">Nos produits</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="bg-gray-100 rounded-lg h-80 animate-pulse"></div>
@@ -59,7 +59,7 @@ export function FeaturedProducts() {
   return (
     <section id="new" className="py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl font-bold mb-8">Nouveautés</h2>
+        <h2 className="text-2xl font-bold mb-8">Nos produits</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
