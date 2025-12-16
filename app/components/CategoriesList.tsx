@@ -73,16 +73,16 @@ export default function CategoriesList() {
 
     return (
         <section className="mb-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold text-gray-900">Catégories populaires</h2>
-                <a
+                {/* <a
                     href="/categories" // Lien vers la page de toutes les catégories
                     className="text-indigo-600 hover:underline flex items-center text-sm font-medium"
                 >
                     Voir tout
                     <ArrowForwardIcon />
-                </a>
-            </div> */}
+                </a> */}
+            </div>
 
             {/* Grille de 2, 4, ou 6 colonnes comme demandé */}
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">

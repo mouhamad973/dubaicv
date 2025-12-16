@@ -32,7 +32,7 @@ const Footer = () => (
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-gold transition-colors">
+            <a href="category/cmj8nkwho0000ju04cef4l5zq" className="hover:text-gold transition-colors">
               Parfumerie
             </a>
           </li>
