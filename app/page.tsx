@@ -5,8 +5,8 @@ import Navbar from "./components/Navbar";
 import MobileMenu from "./components/MobileMenu";
 import HeroSection from "./components/HeroSection";
 import Footer from "./components/Footer";
-import ProductCard from "./components/ProductCard";
 import CategoriesList from "./components/CategoriesList";
+import { FeaturedProducts } from "./components/FeaturedProducts";
 
 const HomePage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -26,7 +26,7 @@ const HomePage = () => {
       <main>
         <HeroSection />
         <CategoriesList />
-        <ProductCard />
+        <FeaturedProducts />
 
       </main>
 

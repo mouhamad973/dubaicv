@@ -10,6 +10,7 @@ export type Product = {
   isFeatured: boolean;
   category: { name: string };
   images: { url: string }[]; // <-- nouveau champ pour les images
+  createdAt?: string;
 };
 
 export type ProductForm = {

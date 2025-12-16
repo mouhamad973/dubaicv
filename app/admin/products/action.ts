@@ -92,6 +92,19 @@ export async function getFeaturedProducts() {
   });
 }
 
+export async function getLatestProducts() {
+  return await prisma.product.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 8,
+    include: {
+      category: true,
+      images: true, // Inclure toutes les images
+    },
+  });
+}
+
 export async function deleteProduct(productId: string) {
   try {
     // Récupère le produit + images

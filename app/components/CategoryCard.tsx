@@ -11,7 +11,7 @@ export default function CategoryCard({ id, name, image }: Props) {
     return (
         <Link href={`/category/${id}`} className="group">
             {/* Conteneur principal de la carte */}
-            <div className="rounded-lg bg-white shadow-sm overflow-hidden transition-shadow duration-200 hover:shadow-md">
+            <div className="rounded-lg bg-white shadow-sm overflow-hidden transition-shadow duration-200 hover:shadow-md"  id="categories">
 
                 {/* Conteneur de l'image avec hauteur fixe h-36 */}
                 <div className="h-36 bg-gray-200 relative overflow-hidden">

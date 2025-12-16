@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { X } from 'lucide-react';
+import Link from 'next/link';
 
 type MobileMenuProps = {
   open: boolean;
@@ -19,18 +20,15 @@ const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
         </button>
       </div>
       <div className="flex flex-col items-center gap-8 mt-12 text-xl font-serif">
-        <a href="#" className="hover:text-gold">
+        <Link href="/#categories" className="hover:text-gold" onClick={onClose}>
           Collections
-        </a>
-        <a href="#" className="hover:text-gold">
-          Femmes
-        </a>
-        <a href="#" className="hover:text-gold">
-          Hommes
-        </a>
-        <a href="#" className="hover:text-gold">
-          Maison
-        </a>
+        </Link>
+        <Link href="/#new" className="hover:text-gold" onClick={onClose}>
+          Nouveautés
+        </Link>
+        <Link href="/products" className="hover:text-gold" onClick={onClose}>
+          Tous les produits
+        </Link>
       </div>
     </div>
   );

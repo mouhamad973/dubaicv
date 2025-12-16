@@ -73,14 +73,14 @@ export default function CartModal() {
 
   return (
     <dialog id="my_modal_2" className="modal">
-      <div className="modal-box max-w-2xl w-full max-h-[90vh] flex flex-col">
+      <div className="modal-box max-w-2xl w-full max-h-[90vh] flex flex-col bg-white text-gray-800">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="font-bold text-xl">
+          <h3 className="font-bold text-xl text-gray-900">
             {isCheckout ? 'Finaliser la commande' : 'Votre Panier'}
           </h3>
           <form method="dialog">
             <button 
-              className="btn btn-sm btn-circle"
+              className="btn btn-sm btn-circle bg-white hover:bg-gray-100 border-gray-200 text-gray-700 hover:text-gray-900"
               disabled={isProcessing}
             >
               <X className="w-4 h-4" />
