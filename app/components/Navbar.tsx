@@ -1,15 +1,18 @@
+// components/Navbar.tsx
 'use client';
 
-import React from 'react';
+import React, { Suspense, useCallback, useEffect, useRef, useState } from 'react'; // Ajout de useCallback
 import { Menu, Search as SearchIcon, ShoppingBag, X } from 'lucide-react';
 import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Retrait de useSearchParams
 import { useCart } from "@/app/context/CartContext";
-import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 
-// Import dynamique pour éviter les erreurs de SSR
+// Importez le nouveau composant d'initialisation de recherche
+import SearchQueryInitializer from './SearchQueryInitializer';
+
+// Import dynamique pour éviter les erreurs de SSR sur CartModal
 const CartModal = dynamic(() => import('./CartModal'), { ssr: false });
 
 type NavbarProps = {
@@ -23,10 +26,17 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
   const { cart } = useCart();
 
   const router = useRouter();
-  const searchParams = useSearchParams();
+  // RETRAIT DE : const searchParams = useSearchParams();
+
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  // Fonction pour mettre à jour l'état de la requête de recherche.
+  // Utilisé par SearchQueryInitializer et stable grâce à useCallback.
+  const handleQueryUpdate = useCallback((query: string) => {
+    setSearchQuery(query);
+  }, []);
 
   // Gestionnaire pour le clic sur Collections
   const handleCollectionsClick = (e: React.MouseEvent) => {
@@ -36,7 +46,7 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
       categoriesSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
-  
+
   // 🔥 Total réel du panier
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -51,7 +61,7 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
     if (trimmedQuery) {
       router.push(`/search?q=${encodeURIComponent(trimmedQuery)}`);
       // Ne pas fermer automatiquement sur desktop pour permettre des recherches successives
-      if (window.innerWidth < 768) { // Mobile
+      if (typeof window !== 'undefined' && window.innerWidth < 768) { // Mobile
         setIsSearchOpen(false);
       }
     }
@@ -69,17 +79,15 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isSearchOpen]);
 
-  // Effet pour mettre à jour la requête de recherche depuis l'URL
-  useEffect(() => {
-    const query = searchParams.get('q');
-    if (query) {
-      setSearchQuery(query);
-    }
-  }, [searchParams]);
-
+  // RETRAIT DE : L'useEffect pour useSearchParams (maintenant dans SearchQueryInitializer)
 
   return (
     <>
+      {/* Composant isolant l'utilisation de useSearchParams */}
+      <Suspense fallback={null}>
+        <SearchQueryInitializer onQueryUpdate={handleQueryUpdate} />
+      </Suspense>
+
       <nav
         className={`fixed top-0 left-0 w-full z-50 backdrop-blur-lg transition-all duration-500 
           ${scrolled ? 'bg-white/90 shadow-lg py-3 border-b border-gray-100' : 'bg-transparent py-5'}
@@ -105,8 +113,8 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
           <div className="hidden md:flex items-center gap-10 text-[15px] font-medium tracking-wide">
             <Link href="/products" className="nav-link">Tous les produits</Link>
             <Link href="/#new" className="nav-link">Nouveautés</Link>
-             <a 
-              href="#categories" 
+            <a
+              href="#categories"
               onClick={handleCollectionsClick}
               className="nav-link hover:text-amber-600 transition-colors cursor-pointer"
             >
@@ -128,7 +136,7 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
             {/* Barre de recherche intégrée */}
             <div className="relative group">
               {/* Bouton de recherche */}
-              <button 
+              <button
                 onClick={() => {
                   setIsSearchOpen(!isSearchOpen);
                   setTimeout(() => searchInputRef.current?.focus(), 0);
@@ -140,18 +148,17 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
               </button>
 
               {/* Barre de recherche déroulante */}
-              <div 
-                className={`absolute right-0 mt-2 w-72 md:w-80 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 origin-top-right transform-gpu ${
-                  isSearchOpen 
-                    ? 'opacity-100 scale-100 visible' 
+              <div
+                className={`absolute right-0 mt-2 w-72 md:w-80 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 origin-top-right transform-gpu ${isSearchOpen
+                    ? 'opacity-100 scale-100 visible'
                     : 'opacity-0 scale-95 invisible'
-                }`}
+                  }`}
                 style={{
                   top: '100%',
                   boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)'
                 }}
               >
-                <form 
+                <form
                   onSubmit={handleSearch}
                   className="relative"
                 >
@@ -174,7 +181,7 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
                         <X className="h-4 w-4" />
                       </button>
                     )}
-                    <button 
+                    <button
                       type="submit"
                       className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-amber-600 hover:text-amber-700"
                       aria-label="Rechercher"
@@ -183,7 +190,7 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
                     </button>
                   </div>
                 </form>
-                
+
                 {/* Suggestions (optionnel) */}
                 {searchQuery && (
                   <div className="border-t border-gray-100 py-2 text-sm text-gray-500 px-3">
@@ -195,7 +202,7 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
 
             {/* Overlay pour mobile */}
             {isSearchOpen && (
-              <div 
+              <div
                 className="fixed inset-0 bg-black/20 z-40 md:hidden"
                 onClick={() => setIsSearchOpen(false)}
               />
@@ -252,7 +259,7 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
           </div>
         </div>
       </nav>
-      
+
       {/* Modal du panier */}
       <CartModal />
     </>

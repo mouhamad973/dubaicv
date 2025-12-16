@@ -8,6 +8,13 @@ const words = ['Imbattables', 'Guëne Yomb', 'Guëne Woor'];
 const OUTLINE_COLOR_CLASS = "text-amber-700 border-amber-200 hover:bg-amber-50";
 const PRIMARY_COLOR_CLASSES = "bg-amber-600 hover:bg-amber-700";
 
+const handleCollectionsClick = (e: React.MouseEvent) => {
+  e.preventDefault();
+  const categoriesSection = document.getElementById('categories');
+  if (categoriesSection) {
+    categoriesSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 const HeroSection = () => {
   const [index, setIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
@@ -71,12 +78,13 @@ const HeroSection = () => {
           </Link>
 
           {/* Bouton Secondaire (Nos catégories) - Style Contour Or/Ambre */}
-          <Link
-            href="/categories"
+          <a
+            href="#categories"
+            onClick={handleCollectionsClick}
             className={`inline-flex items-center justify-center px-8 py-3 border ${OUTLINE_COLOR_CLASS} text-base font-semibold rounded-full bg-white ${OUTLINE_COLOR_CLASS.split(' ')[0].replace('text', 'hover:text')} transition duration-300`}
           >
             Nos catégories
-          </Link>
+          </a>
 
         </div>
       </div>
