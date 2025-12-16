@@ -15,7 +15,7 @@ export default function CartModal() {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  
+
   const handleQuantityChange = (id: string, newQuantity: number) => {
     if (newQuantity < 1) return;
     updateQuantity(id, newQuantity);
@@ -79,7 +79,7 @@ export default function CartModal() {
             {isCheckout ? 'Finaliser la commande' : 'Votre Panier'}
           </h3>
           <form method="dialog">
-            <button 
+            <button
               className="btn btn-sm btn-circle bg-white hover:bg-gray-100 border-gray-200 text-gray-700 hover:text-gray-900"
               disabled={isProcessing}
             >
@@ -116,11 +116,11 @@ export default function CartModal() {
                       </div>
                       <div className="flex-1">
                         <h4 className="font-medium">{item.name}</h4>
-                        <p className="text-sm text-gray-500 mb-1">Prix unitaire: {item.price.toFixed(2)} €</p>
+                        <p className="text-sm text-gray-500 mb-1">Prix unitaire: {item.price.toFixed(2)} fcfa</p>
                         <div className="flex items-center gap-2">
                           <span className="text-sm">Quantité:</span>
                           <div className="flex items-center border rounded-md overflow-hidden">
-                            <button 
+                            <button
                               onClick={(e) => {
                                 e.stopPropagation();
                                 handleQuantityChange(item.id, item.quantity - 1);
@@ -131,7 +131,7 @@ export default function CartModal() {
                               <Minus size={14} />
                             </button>
                             <span className="w-8 text-center">{item.quantity}</span>
-                            <button 
+                            <button
                               onClick={(e) => {
                                 e.stopPropagation();
                                 handleQuantityChange(item.id, item.quantity + 1);
@@ -143,7 +143,7 @@ export default function CartModal() {
                             </button>
                           </div>
                         </div>
-                        <p className="font-medium mt-1">Total: {(item.price * item.quantity).toFixed(2)} €</p>
+                        <p className="font-medium mt-1">Total: {(item.price * item.quantity).toFixed(2)} fcfa</p>
                       </div>
                       <button
                         onClick={() => removeFromCart(item.id)}
@@ -162,7 +162,7 @@ export default function CartModal() {
               <div className="mt-6 border-t pt-4">
                 <div className="flex justify-between items-center mb-4">
                   <span className="font-medium">Total</span>
-                  <span className="font-bold text-lg">{total.toFixed(2)} €</span>
+                  <span className="font-bold text-lg">{total.toFixed(2)} fcfa</span>
                 </div>
                 <button
                   onClick={() => setIsCheckout(true)}

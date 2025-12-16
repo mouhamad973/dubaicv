@@ -87,8 +87,8 @@ export default function ProductClient({ product }: ProductClientProps) {
                                     key={index}
                                     onClick={() => setMainImage(image.url)}
                                     className={`relative w-full aspect-square rounded-lg overflow-hidden transition-all duration-200 ${image.url === mainImage
-                                            ? 'ring-4 ring-offset-2 ring-indigo-600 shadow-md'
-                                            : 'opacity-70 hover:opacity-100 hover:ring-2 hover:ring-gray-300'
+                                        ? 'ring-4 ring-offset-2 ring-indigo-600 shadow-md'
+                                        : 'opacity-70 hover:opacity-100 hover:ring-2 hover:ring-gray-300'
                                         }`}
                                 >
                                     <Image
@@ -174,12 +174,12 @@ export default function ProductClient({ product }: ProductClientProps) {
                                 Ajouter au panier
                             </button>
 
-                            <button
+                            {/* <button
                                 onClick={handleBuyNow}
                                 className="btn btn-lg btn-primary flex-1 shadow-md hover:bg-indigo-700 transition-colors"
                             >
                                 Acheter maintenant
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>

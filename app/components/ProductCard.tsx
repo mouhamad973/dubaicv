@@ -31,7 +31,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
             <div className="group relative w-full bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col">
                 {/* Zone image */}
                 <div className="relative h-72 overflow-hidden bg-gray-100">
-                    
+
                     {/* <button className="absolute top-3 right-3 z-20 bg-white/80 backdrop-blur-sm p-2 rounded-full text-gray-400 hover:text-red-500 transition-colors">
                         <Heart size={18} />
                     </button> */}
@@ -73,15 +73,15 @@ export const ProductCard = ({ product }: { product: Product }) => {
                             {product.promoPrice ? (
                                 <>
                                     <span className="text-xs text-gray-400 line-through font-medium leading-none mb-1">
-                                        {product.price} €
+                                        {product.price} fcfa
                                     </span>
                                     <span className="text-xl font-extrabold text-gray-900 leading-none">
-                                        {product.promoPrice} €
+                                        {product.promoPrice} fcfa
                                     </span>
                                 </>
                             ) : (
                                 <span className="text-xl font-extrabold text-gray-900 leading-none mt-4">
-                                    {product.price} €
+                                    {product.price} fcfa
                                 </span>
                             )}
                         </div>

@@ -17,7 +17,7 @@ const checkoutSchema = z.object({
 
 type CheckoutFormData = z.infer<typeof checkoutSchema>;
 
-export default function CheckoutForm({ 
+export default function CheckoutForm({
   onCancel,
   onSubmit,
   isSubmitting,
@@ -127,7 +127,7 @@ export default function CheckoutForm({
         <div className="pt-4 border-t">
           <div className="flex justify-between items-center mb-4">
             <span className="font-medium">Total à payer</span>
-            <span className="font-bold text-lg">{total.toFixed(2)} €</span>
+            <span className="font-bold text-lg">{total.toFixed(2)} fcfa</span>
           </div>
 
           <div className="flex space-x-3">
