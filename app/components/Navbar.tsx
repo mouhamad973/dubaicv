@@ -123,7 +123,7 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
 
             {/* Affichage conditionnel Admin */}
             {user?.primaryEmailAddress?.emailAddress &&
-              ["kingmetzo1@gmail.com", "momo@gmail.com"].includes(user.primaryEmailAddress.emailAddress) && (
+              ["kingmetzo1@gmail.com", "mekshop222@gmail.com"].includes(user.primaryEmailAddress.emailAddress) && (
                 <Link href={"/admin"} className="nav-link">
                   Admin
                 </Link>
@@ -150,8 +150,8 @@ const Navbar = ({ scrolled, onMenuOpen }: NavbarProps) => {
               {/* Barre de recherche déroulante */}
               <div
                 className={`absolute right-0 mt-2 w-72 md:w-80 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 origin-top-right transform-gpu ${isSearchOpen
-                    ? 'opacity-100 scale-100 visible'
-                    : 'opacity-0 scale-95 invisible'
+                  ? 'opacity-100 scale-100 visible'
+                  : 'opacity-0 scale-95 invisible'
                   }`}
                 style={{
                   top: '100%',
